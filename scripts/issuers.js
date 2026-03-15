@@ -173,6 +173,15 @@ class IssuersModal {
 		this.query('previewer').style.display = display
 	}
 
+	fetchNextTranslation () {
+		if (this.currentIndex === this.filteredTranslations.length - 1) {
+			this.hideTranslationForm()
+		} else {
+			this.currentIndex++
+			this.fillTranslationForm()
+		}
+	}
+
 	fillInput () {
 		const translatedField = this.query('translated')
 		const destinationField = this.currentTranslation.querySelector(`textarea.translation[data-column="${this.field}"]`)
@@ -227,15 +236,6 @@ class IssuersModal {
 		this.translations = this.queryAllTranslations()
 	}
 
-	fetchNextTranslation () {
-		if (this.currentIndex === this.filteredTranslations.length - 1) {
-			this.hideTranslationForm()
-		} else {
-			this.currentIndex++
-			this.fillTranslationForm()
-		}
-	}
-
 	query (selector) {
 		return this.modal.querySelector(`#numista-translators-modal__${selector}`)
 	}
@@ -256,8 +256,8 @@ class IssuersModal {
 		this.template = this.query('template').value.trim()
 
 		if (validatePatterns(this.pattern, this.template)) {
-			this.displayPreviewer()
 			this.setMessage(i18n.getMessage('loading'))
+			this.displayPreviewer()
 
 			this.patternRegexp = buildRegexpFromPattern(this.pattern)
 			this.filteredTranslations = this.filterTranslations()
