@@ -4,7 +4,7 @@
 		"description": "Button to dismiss modal"
  	},
 	"action_replace": {
-		"message": "Replace",
+		"message": "Translate",
 		"description": "Button to replace current translation"
 	},
 	"action_search": {
