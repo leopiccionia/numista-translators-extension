@@ -75,12 +75,12 @@ function getSourceIndex (field) {
 
 function validatePatterns (find, replace) {
 	if (!find) {
-		alert(i18n.getMessage(i18n.getMessage('error_empty_find')))
+		alert(i18n.getMessage('error_empty_find'))
 		return false
 	}
 
 	if (!replace) {
-		alert(i18n.getMessage(i18n.getMessage('error_empty_replace')))
+		alert(i18n.getMessage('error_empty_replace'))
 		return false
 	}
 
@@ -93,7 +93,7 @@ function validatePatterns (find, replace) {
 	}
 
 	if (findPlaceholders > 1) {
-		alert(i18n.getMessage(i18n.getMessage('error_too_many_placeholders')))
+		alert(i18n.getMessage('error_too_many_placeholders'))
 		return false
 	}
 
