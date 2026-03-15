@@ -1,0 +1,47 @@
+#numista-translators-modal {
+	--numista-light: #dfeefb;
+	--numista-dark: #008;
+
+	background-color: var(--numista-light);
+	border: 3px solid var(--numista-dark);
+	border-radius: 0.5rem;
+	inset-inline-end: 1rem;
+	padding: 1rem;
+	position: fixed;
+	top: 1rem;
+}
+
+#numista-translators-modal__dismiss {
+	background: transparent;
+	border: none;
+	inset-inline-end: 0.5rem;
+	padding: 0;
+	position: absolute;
+	top: 0.5rem;
+}
+
+#numista-translators-modal form {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+#numista-translators-modal label {
+	display: flex;
+	flex-direction: column;
+}
+
+#numista-translators-modal label span {
+	color: var(--numista-dark);
+	font-weight: bold;
+}
+
+#numista-translators-modal__previewer {
+	display: contents;
+}
+
+.numista-translators-modal__buttons {
+	display: flex;
+	gap: 0.5rem;
+	justify-content: space-between;
+}

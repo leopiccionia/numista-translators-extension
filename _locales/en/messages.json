@@ -1,0 +1,90 @@
+{
+	"action_dismiss_modal": {
+		"message": "Dismiss",
+		"description": "Button to dismiss modal"
+ 	},
+	"action_replace": {
+		"message": "Replace",
+		"description": "Button to replace current translation"
+	},
+	"action_search": {
+		"message": "Search",
+		"description": "Button to search matching translations"
+	},
+	"action_skip": {
+		"message": "Skip",
+		"description": "Button to skip current translation"
+	},
+	"error_empty_find": {
+		"message": "Error: Find is empty!",
+		"description": "Error thrown if Find pattern is empty"
+	},
+	"error_empty_replace": {
+		"message": "Error: Replace is empty!",
+		"description": "Error thrown if Replace pattern is empty"
+	},
+	"error_mismatch_placeholders": {
+		"message": "Error: Find contains $FIND$ placeholders, but Replace contains $REPLACE$!",
+		"description": "Error thrown if Find and Replace pattern contains a different number of placeholders",
+		"placeholders": {
+			"find": {
+				"content": "$1"
+			},
+			"replace": {
+				"content": "$2"
+			}
+		}
+	},
+	"error_too_many_placeholders": {
+		"message": "Error: Patterns should contain at most one '#' placeholder!",
+		"description": "Error thrown if patterns contain more than one placeholder"
+	},
+	 "field_from": {
+		"message": "\"From\" name",
+		"description": "'\"From\" name' row"
+	},
+	"field_name": {
+		"message": "Name",
+		"description": "'Name' row"
+	},
+	"label_field": {
+		"message": "Field",
+		"description": "Label for translation row selector"
+	},
+	"label_find": {
+		"message": "Find",
+		"description": "Label for Find pattern"
+	},
+	"label_original": {
+		"message": "Original",
+		"description": "Label for text in English"
+	},
+	"label_replace": {
+		"message": "Replace",
+		"description": "Label for Replace pattern"
+	},
+	"label_translated": {
+		"message": "Translated",
+		"description": "Label for translated text"
+	},
+	"loading": {
+		"message": "Loading...",
+		"description": "Loading indicator"
+	},
+	"placeholder_replace": {
+		"message": "#, Ciudad de",
+		"description": "Placeholder for Replace pattern"
+	},
+	"results": {
+		"message": "Result $CURRENT$ of $TOTAL$",
+		"description": "Found results indicator",
+		"placeholders": {
+			"current": {
+				"content": "$1"
+			},
+			"total": {
+				"content": "$2"
+			}
+		}
+	}
+}

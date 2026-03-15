@@ -1,0 +1,26 @@
+{
+	"manifest_version": 3,
+	"name": "Numista Translator Helper",
+	"version": "0.1.0",
+	"description": "Helper for translating Numista issuers, etc.",
+	"default_locale": "en",
+	"icons": {
+		"16": "assets/icon-16.png",
+		"32": "assets/icon-32.png",
+		"48": "assets/icon-48.png",
+		"128": "assets/icon-128.png"
+	},
+	"content_scripts": [
+		{
+			"js": [
+				"scripts/issuers.js"
+			],
+			"css": [
+				"styles/modal.css"
+			],
+			"matches": [
+				"https://*.numista.com/admin/translation/translate_table.php?t=issuers&l=*"
+			]
+		}
+	]
+}

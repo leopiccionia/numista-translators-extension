@@ -1,0 +1,72 @@
+{
+	"action_dismiss_modal": {
+		"message": "Dispensar"
+ 	},
+	"action_replace": {
+		"message": "Substituir"
+	},
+	"action_search": {
+		"message": "Pesquisar"
+	},
+	"action_skip": {
+		"message": "Pular"
+	},
+	"error_empty_find": {
+		"message": "Erro: Localizar está vazio!"
+	},
+	"error_empty_replace": {
+		"message": "Erro: Substituir está vazio!"
+	},
+	"error_mismatch_placeholders": {
+		"message": "Error: Localizar contém $FIND$ placeholders, mas Substituir contém $REPLACE$!",
+		"placeholders": {
+			"find": {
+				"content": "$1"
+			},
+			"replace": {
+				"content": "$2"
+			}
+		}
+	},
+	"error_too_many_placeholders": {
+		"message": "Erro: Padrões devem conter no máximo um placeholder '#'!"
+	},
+	 "field_from": {
+		"message": "\"De\" Nome"
+	},
+	"field_name": {
+		"message": "Nome"
+	},
+	"label_field": {
+		"message": "Campo"
+	},
+	"label_find": {
+		"message": "Localizar"
+	},
+	"label_original": {
+		"message": "Original"
+	},
+	"label_replace": {
+		"message": "Substituir"
+	},
+	"label_translated": {
+		"message": "Traduzido"
+	},
+	"loading": {
+		"message": "Carregando..."
+	},
+	"placeholder_replace": {
+		"message": "#, Cidade de"
+	},
+	"results": {
+		"message": "Resultado $CURRENT$ de $TOTAL$",
+		"placeholders": {
+			"current": {
+				"content": "$1"
+			},
+			"total": {
+				"content": "$2"
+			}
+		}
+	}
+}
