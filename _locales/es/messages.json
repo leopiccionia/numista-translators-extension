@@ -1,0 +1,72 @@
+{
+	"action_dismiss_modal": {
+		"message": "Descartar"
+	},
+	"action_replace": {
+		"message": "Traducir"
+	},
+	"action_search": {
+		"message": "Buscar"
+	},
+	"action_skip": {
+		"message": "Saltar"
+	},
+	"error_empty_find": {
+		"message": "Error: ¡Localizar está vacío!"
+	},
+	"error_empty_replace": {
+		"message": "Error: ¡Reemplazar está vacío!"
+	},
+	"error_mismatch_placeholders": {
+		"message": "Error: ¡Localizar contiene $FIND$ caracteres de sustitución, pero Reemplazar contiene $REPLACE$!",
+		"placeholders": {
+			"find": {
+				"content": "$1"
+			},
+			"replace": {
+				"content": "$2"
+			}
+		}
+	},
+	"error_too_many_placeholders": {
+		"message": "Error: ¡Los patrones deben contener como máximo un carácter de sustitución '#'!"
+	},
+	"field_from": {
+		"message": "\"De\" Nombre"
+	},
+	"field_name": {
+		"message": "Nombre"
+	},
+	"label_field": {
+		"message": "Campo"
+	},
+	"label_find": {
+		"message": "Localizar"
+	},
+	"label_original": {
+		"message": "Original"
+	},
+	"label_replace": {
+		"message": "Reemplazar"
+	},
+	"label_translated": {
+		"message": "Traducido"
+	},
+	"loading": {
+		"message": "Cargando..."
+	},
+	"placeholder_replace": {
+		"message": "#, Ciudad de"
+	},
+	"results": {
+		"message": "Resultado $CURRENT$ de $TOTAL$",
+		"placeholders": {
+			"current": {
+				"content": "$1"
+			},
+			"total": {
+				"content": "$2"
+			}
+		}
+	}
+}
