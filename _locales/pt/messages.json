@@ -1,7 +1,7 @@
 {
 	"action_dismiss_modal": {
 		"message": "Dispensar"
- 	},
+	},
 	"action_replace": {
 		"message": "Traduzir"
 	},
@@ -18,7 +18,7 @@
 		"message": "Erro: Substituir está vazio!"
 	},
 	"error_mismatch_placeholders": {
-		"message": "Error: Localizar contém $FIND$ placeholders, mas Substituir contém $REPLACE$!",
+		"message": "Error: Localizar contém $FIND$ caracteres de substituição, mas Substituir contém $REPLACE$!",
 		"placeholders": {
 			"find": {
 				"content": "$1"
@@ -29,9 +29,9 @@
 		}
 	},
 	"error_too_many_placeholders": {
-		"message": "Erro: Padrões devem conter no máximo um placeholder '#'!"
+		"message": "Erro: Padrões devem conter no máximo um caractere de substituição '#'!"
 	},
-	 "field_from": {
+	"field_from": {
 		"message": "\"De\" Nome"
 	},
 	"field_name": {
