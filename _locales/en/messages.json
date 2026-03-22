@@ -47,6 +47,14 @@
 		"message": "Name",
 		"description": "'Name' row"
 	},
+	"field_subdivisions": {
+		"message": "Subdivisions",
+		"description": "'Subvisions' row"
+	},
+	"field_title": {
+		"message": "Title",
+		"description": "'Title' row"
+	},
 	"label_field": {
 		"message": "Field",
 		"description": "Label for translation row selector"
@@ -67,13 +75,21 @@
 		"message": "Translated",
 		"description": "Label for translated text"
 	},
+	"label_use_original": {
+		"message": "Use original as alternate name",
+		"description": "Label for Use Original as Alternate Name checkbox"
+	},
 	"loading": {
 		"message": "Loading...",
 		"description": "Loading indicator"
 	},
-	"placeholder_replace": {
+	"placeholder_replace_currencies": {
+		"message": "Libra",
+		"description": "Placeholder for Replace pattern (currencies)"
+	},
+	"placeholder_replace_issuers": {
 		"message": "#, Ciudad de",
-		"description": "Placeholder for Replace pattern"
+		"description": "Placeholder for Replace pattern (issuers)"
 	},
 	"results": {
 		"message": "Result $CURRENT$ of $TOTAL$",

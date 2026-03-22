@@ -13,6 +13,17 @@
 	"content_scripts": [
 		{
 			"js": [
+				"scripts/currencies.js"
+			],
+			"css": [
+				"styles/modal.css"
+			],
+			"matches": [
+				"https://*.numista.com/admin/translation/translate_table.php?t=currencies&l=*"
+			]
+		},
+		{
+			"js": [
 				"scripts/issuers.js"
 			],
 			"css": [

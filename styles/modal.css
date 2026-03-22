@@ -8,6 +8,7 @@
 	inset-inline-end: 1rem;
 	padding: 1rem;
 	position: fixed;
+	width: 15rem;
 	top: 1rem;
 }
 
@@ -34,6 +35,15 @@
 #numista-translators-modal label span {
 	color: var(--numista-dark);
 	font-weight: bold;
+}
+
+#numista-translators-modal label:has(input[type="checkbox"]) {
+	display: block;
+	line-height: 1.25;
+}
+
+#numista-translators-modal label:has(input[type="checkbox"]) span {
+	vertical-align: text-top;
 }
 
 #numista-translators-modal__previewer {

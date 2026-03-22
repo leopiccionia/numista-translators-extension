@@ -1,22 +1,26 @@
 const i18n = getI18n()
 
-const ISSUERS_TEMPLATE = `
+const CURRENCIES_TEMPLATE = `
 <button class="secondary" id="numista-translators-modal__dismiss" title="${i18n.getMessage('action_dismiss_modal')}">&times;</button>
 <form id="numista-translators-modal__form">
 	<label>
 		<span>${i18n.getMessage('label_find')}</span>
-		<input type="text" name="pattern" id="numista-translators-modal__pattern" placeholder="#, City of">
+		<input type="text" name="pattern" id="numista-translators-modal__pattern" placeholder="Pound">
 	</label>
 	<label>
 		<span>${i18n.getMessage('label_replace')}</span>
-		<input type="text" name="replacement" id="numista-translators-modal__template" placeholder="${i18n.getMessage('placeholder_replace_issuers')}">
+		<input type="text" name="replacement" id="numista-translators-modal__template" placeholder="${i18n.getMessage('placeholder_replace_currencies')}">
 	</label>
 	<label>
 		<span>${i18n.getMessage('label_field')}</span>
 		<select name="field" id="numista-translators-modal__field">
-			<option value="" selected>${i18n.getMessage('field_name')}</option>
-			<option value="de_">${i18n.getMessage('field_from')}</option>
+			<option value="titre-" selected>${i18n.getMessage('field_title')}</option>
+			<option value="equivalence-">${i18n.getMessage('field_subdivisions')}</option>
 		</select>
+	</label>
+	<label id="numista-translators-modal__use-original-wrapper">
+		<input type="checkbox" name="use-original" id="numista-translators-modal__use-original">
+		<span>${i18n.getMessage('label_use_original')}</span>
 	</label>
 	<button id="numista-translators-modal__search" type="button">${i18n.getMessage('action_search')}</button>
 	<div id="numista-translators-modal__previewer" style="display: none">
@@ -38,19 +42,8 @@ const ISSUERS_TEMPLATE = `
 `
 
 function buildRegexpFromPattern (pattern) {
-	const placeholder = String.raw`\x23` // escaped '#'
-	const regexpString = RegExp.escape(pattern).replace(placeholder, '(.*)')
-	return new RegExp(`^${regexpString}$`)
-}
-
-function countPlaceholders (pattern) {
-	let count = 0
-	for (const char of pattern) {
-		if (char === '#') {
-			count++
-		}
-	}
-	return count
+	const regexpString = RegExp.escape(pattern)
+	return new RegExp(String.raw`^${regexpString} \((.*)\)$`)
 }
 
 function getI18n () {
@@ -66,8 +59,8 @@ function getI18n () {
 }
 
 function getSourceIndex (field) {
-	if (field === 'de_') {
-		return 4
+	if (field === 'equivalence-') {
+		return 8
 	} else {
 		return 2
 	}
@@ -84,25 +77,14 @@ function validatePatterns (find, replace) {
 		return false
 	}
 
-	const findPlaceholders = countPlaceholders(find)
-	const replacePlaceholders = countPlaceholders(replace)
-
-	if (findPlaceholders !== replacePlaceholders) {
-		alert(i18n.getMessage('error_mismatch_placeholders', [findPlaceholders, replacePlaceholders]))
-		return false
-	}
-
-	if (findPlaceholders > 1) {
-		alert(i18n.getMessage('error_too_many_placeholders'))
-		return false
-	}
-
 	return true
 }
 
-class IssuersModal {
+
+class CurrenciesModal {
+	useOriginal = false
 	currentIndex = 0
-	field = ''
+	field = 'titre-'
 	filteredTranslations = []
 	listeners = []
 	pattern = ''
@@ -122,14 +104,15 @@ class IssuersModal {
 
 		this.addListener(this.query('field'), 'change', (event) => {
 			this.field = event.target.value
+			this.displayUseOriginal(this.field === 'titre-')
 		})
 
 		this.addListener(this.query('form'), 'submit', (event) => {
 			event.preventDefault()
 		})
 
-		this.addListener(this.query('replace'), 'click', () => {
-			this.fillInput()
+		this.addListener(this.query('replace'), 'click', async () => {
+			await this.fillInput()
 			this.fetchNextTranslation()
 		})
 
@@ -140,12 +123,16 @@ class IssuersModal {
 		this.addListener(this.query('skip'), 'click', () => {
 			this.fetchNextTranslation()
 		})
+
+		this.addListener(this.query('use-original'), 'change', () => {
+			this.useOriginal = !this.useOriginal
+		})
 	}
 
 	createModal () {
 		const modal = document.createElement('div')
 		modal.id = 'numista-translators-modal'
-		modal.innerHTML = ISSUERS_TEMPLATE
+		modal.innerHTML = CURRENCIES_TEMPLATE
 		document.body.appendChild(modal)
 
 		setTimeout(() => {
@@ -173,6 +160,10 @@ class IssuersModal {
 		this.query('previewer').style.display = visible ? '' : 'none'
 	}
 
+	displayUseOriginal (visible = true) {
+		this.query('use-original-wrapper').style.display = visible ? '' : 'none'
+	}
+
 	fetchNextTranslation () {
 		if (this.currentIndex === this.filteredTranslations.length - 1) {
 			this.hideTranslationForm()
@@ -183,13 +174,32 @@ class IssuersModal {
 	}
 
 	fillInput () {
-		const translatedField = this.query('translated')
-		const destinationField = this.currentTranslation.querySelector(`textarea.translation[data-column="${this.field}"]`)
+		return new Promise((resolve) => {
+			const currentTranslation = this.currentTranslation
 
-		destinationField.focus()
-		destinationField.value = translatedField.value.trim()
-		destinationField.blur()
-		destinationField.dispatchEvent(new Event('focusout', { bubbles: true }))
+			const translatedField = this.query('translated')
+			const destinationField = currentTranslation.querySelector(`textarea.translation[data-column="${this.field}"]`)
+
+			destinationField.focus()
+			destinationField.value = translatedField.value.trim()
+			destinationField.blur()
+			destinationField.dispatchEvent(new Event('focusout', { bubbles: true }))
+
+			if (this.useOriginal && this.field === 'titre-') {
+				setTimeout(() => {
+					const alternateField = currentTranslation.querySelector('textarea.translation[data-column="alternative_names-"]')
+
+					alternateField.focus()
+					alternateField.value = this.pattern
+					alternateField.blur()
+					alternateField.dispatchEvent(new Event('focusout', { bubbles: true }))
+					resolve()
+				}, 250)
+			} else {
+				resolve()
+			}
+		})
+
 	}
 
 	fillTranslationForm () {
@@ -201,14 +211,17 @@ class IssuersModal {
 		const currentTranslation = this.currentTranslation
 
 		const sourceField = currentTranslation.querySelector(`div.origin:nth-child(${getSourceIndex(this.field)})`)
-		const matches = sourceField.textContent.match(this.patternRegexp)
+		const sourceText = sourceField.textContent
 
-		if (matches?.[1]) {
-			originalField.value = this.pattern.replace('#', matches[1])
-			translationField.value = this.template.replace('#', matches[1])
-		} else {
+		if (sourceText === this.pattern) {
 			originalField.value = this.pattern
 			translationField.value = this.template
+		} else {
+			const matches = sourceText.match(this.patternRegexp)
+			if (matches?.[1]) {
+				originalField.value = `${this.pattern} (${matches[1]})`
+				translationField.value = `${this.template} (${matches[1]})`
+			}
 		}
 
 		currentTranslation.scrollIntoView({ block: 'center' })
@@ -218,11 +231,21 @@ class IssuersModal {
 		const sourceSelector = `div.origin:nth-child(${getSourceIndex(this.field)})`
 		const translationSelector = `textarea.translation[data-column="${this.field}"]`
 
-		return this.translations.filter((translation) => {
-			const sourceField = translation.querySelector(sourceSelector)
-			const translationField = translation.querySelector(translationSelector)
-			return (!translationField.textContent && this.patternRegexp.test(sourceField.textContent))
-		})
+		if (this.field === 'equivalence-') {
+			return this.translations.filter((translation) => {
+				const sourceField = translation.querySelector(sourceSelector)
+				const translationField = translation.querySelector(translationSelector)
+				return (!translationField.textContent && sourceField.textContent === this.pattern)
+			})
+		} else {
+			return this.translations.filter((translation) => {
+				const sourceField = translation.querySelector(sourceSelector)
+				const sourceText = sourceField.textContent
+				const translationField = translation.querySelector(translationSelector)
+				return (!translationField.textContent && (sourceText === this.pattern || this.patternRegexp.test(sourceText)))
+			})
+		}
+
 	}
 
 	hideTranslationForm () {
@@ -278,5 +301,5 @@ class IssuersModal {
 	}
 }
 
-const issuersModal = new IssuersModal()
-issuersModal.init()
+const currenciesModal = new CurrenciesModal()
+currenciesModal.init()

@@ -37,6 +37,12 @@
 	"field_name": {
 		"message": "Nombre"
 	},
+	"field_subdivisions": {
+		"message": "Subdivisiones"
+	},
+	"field_title": {
+		"message": "Título"
+	},
 	"label_field": {
 		"message": "Campo"
 	},
@@ -52,10 +58,16 @@
 	"label_translated": {
 		"message": "Traducido"
 	},
+	"label_use_original": {
+		"message": "Use el original como nombre alternativo"
+	},
 	"loading": {
 		"message": "Cargando..."
 	},
-	"placeholder_replace": {
+	"placeholder_replace_currencies": {
+		"message": "Libra"
+	},
+	"placeholder_replace_issuers": {
 		"message": "#, Ciudad de"
 	},
 	"results": {
